@@ -7,12 +7,11 @@ phases:
   pre_build:
     commands:
       - echo logging in to AWS ECR...
-      # - $(aws ecr get-login --no-include-email --region us-west-2)
       - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 962804699607.dkr.ecr.us-west-2.amazonaws.com
   build:
     commands:
       - echo build Docker image on `date`
-      - docker build -t aws-innovators-repo:latest .
+      - docker build -t aws-innovators-repo .
       - docker tag aws-innovators-repo:latest 962804699607.dkr.ecr.us-west-2.amazonaws.com/aws-innovators-repo:latest
   post_build:
     commands:
@@ -23,4 +22,4 @@ phases:
       - printf '[{"name":"aws-innovators-container","imageUri":"962804699607.dkr.ecr.us-west-2.amazonaws.com/aws-innovators-repo:latest"}]' > imagedefinitions.json
 artifacts:
   files:
-    - imagedefinitions.json
+    - 'imagedefinitions.json'
