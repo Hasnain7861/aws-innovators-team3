@@ -21,5 +21,5 @@ phases:
       - docker push 962804699607.dkr.ecr.us-west-2.amazonaws.com/aws-innovators-repo:latest
       - echo Writing image definitions file...
       - printf '[{"name":"aws-innovators-container","imageUri":"962804699607.dkr.ecr.us-west-2.amazonaws.com/aws-innovators-repo:latest"}]' > imagedefinitions.json
-artifacts:
-  files: imagedefinitions.json
+    artifacts:
+      files: imagedefinitions.json
