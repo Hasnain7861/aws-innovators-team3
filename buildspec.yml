@@ -13,7 +13,7 @@ phases:
     commands:
       - echo build Docker image on `date`
       - cd src
-      - docker build -t aws-innovators-image:latest .
+      - docker build -t aws-innovators-image:latest.
       - docker tag aws-innovators-image:latest 962804699607.dkr.ecr.us-west-2.amazonaws.com/aws-innovators-repo:latest
   post_build:
     commands:
