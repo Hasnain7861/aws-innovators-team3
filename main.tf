@@ -36,16 +36,16 @@ resource "aws_ecr_repository" "my_first_ecr_repo" {
 }
 
 resource "aws_ecs_cluster" "my_cluster" {
-  name = "my-cluster" # Naming the cluster
+  name = "aws-innovators-team3" # Naming the cluster
 }
 
 
 resource "aws_ecs_task_definition" "my_first_task" {
-  family                   = "my-first-task" # Naming our first task
+  family                   = "aws-innovators-team3" # Naming our first task
   container_definitions    = <<DEFINITION
   [
     {
-      "name": "my-first-task",
+      "name": "aws-innovators-team3",
       "image": "${aws_ecr_repository.my_first_ecr_repo.repository_url}",
       "essential": true,
       "portMappings": [
@@ -135,7 +135,7 @@ resource "aws_lb_listener" "listener" {
 }
 
 resource "aws_ecs_service" "my_first_service" {
-  name            = "my-first-service"                             # Naming our first service
+  name            = "aws-innovators-team3"                             # Naming our first service
   cluster         = "${aws_ecs_cluster.my_cluster.id}"             # Referencing our created Cluster
   task_definition = "${aws_ecs_task_definition.my_first_task.arn}" # Referencing the task our service will spin up
   launch_type     = "FARGATE"
