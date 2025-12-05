@@ -1,38 +1,268 @@
-.App {
-  text-align: center;
+:root {
+  --primary-blue: #0066ff;
+  --deep-blue: #0041a8;
+  --light-blue: #4d94ff;
+  --accent-blue: #00d4ff;
+  --white: #ffffff;
+  --off-white: #f0f6ff;
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --shadow-color: rgba(0, 102, 255, 0.25);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, #0041a8 0%, #0066ff 50%, #00d4ff 100%);
   min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.App {
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  position: relative;
+}
+
+/* Header Section */
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 800;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  margin-bottom: 0.5rem;
+}
+
+.title-decoration {
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--white), transparent);
+  margin: 1.5rem auto 0;
+  border-radius: 2px;
+}
+
+/* Person List Container */
+.person-list-container {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.person-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+/* Person Card */
+.person-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 40px var(--shadow-color),
+              0 0 0 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.person-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--accent-blue));
+}
+
+/* Card Content */
+.card-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.person-avatar {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.avatar-text {
+  color: var(--white);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.person-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.person-id {
+  font-size: 0.75rem;
+  color: var(--primary-blue);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.person-id::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--accent-blue);
+  border-radius: 50%;
+}
+
+.person-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  word-wrap: break-word;
+}
+
+/* Loading State */
+.loading-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 4rem 2rem;
 }
 
-.App-link {
-  color: #61dafb;
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top-color: var(--white);
+  border-radius: 50%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.loading-text {
+  margin-top: 1rem;
+  color: var(--white);
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--card-bg);
+  border-radius: 20px;
+  box-shadow: 0 10px 40px var(--shadow-color);
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.empty-text {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .App {
+    padding: 1.5rem 1rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .title {
+    letter-spacing: 1px;
+  }
+
+  .subtitle {
+    letter-spacing: 2px;
+  }
+
+  .person-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .person-card {
+    padding: 1.25rem;
+  }
+
+  .person-avatar {
+    width: 50px;
+    height: 50px;
+  }
+
+  .avatar-text {
+    font-size: 1.25rem;
+  }
+
+  .person-name {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .App {
+    padding: 1rem 0.75rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .subtitle {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+  }
+
+  .person-card {
+    border-radius: 16px;
+    padding: 1rem;
+  }
+
+  .person-avatar {
+    width: 45px;
+    height: 45px;
+  }
+
+  .person-name {
+    font-size: 1rem;
+  }
+
+  .person-id {
+    font-size: 0.7rem;
   }
 }
